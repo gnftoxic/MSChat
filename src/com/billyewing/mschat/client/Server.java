@@ -26,6 +26,7 @@ public class Server implements Runnable
     public DataOutputStream _output;
     public Thread _thread;
     public boolean _isKilling = false;
+    public boolean _isAuthed = false;
     
     public Server(MSChat s, String n, Socket ss) throws IOException
     {
@@ -94,16 +95,19 @@ public class Server implements Runnable
         {
             int packetId = 0x00;
             
-            packetId = _input.read();
+            packetId = _input.readInt();
             
             if(packetId != 0x05)
             {
+                _output.writeInt(0x06);
+                _output.flush();
                 killSelf();
+                log.info("Got packet ID: 0x" + Integer.toHexString(packetId));
             } else {
                 new ServerJoinEvent(this, _input).execute();
             }
             
-            while((packetId = _input.read()) != 0x00)
+            while((packetId = _input.readInt()) != 0x00)
             {
                 switch(packetId)
                 {
@@ -135,14 +139,12 @@ public class Server implements Runnable
             }
         } catch(Exception e)
         {
-            log.severe(e.getMessage());
             e.printStackTrace();
             try
             {
                 killSelf();
             } catch (IOException ex)
             {
-                log.severe(ex.getLocalizedMessage());
             }
         }
     }

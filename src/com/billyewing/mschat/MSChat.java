@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Logger;
-import javax.security.auth.login.Configuration;
 
 public class MSChat
 {

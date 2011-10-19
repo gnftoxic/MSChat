@@ -23,9 +23,12 @@ public class ServerQuitEvent implements Event
         
         _server.getServer()._clientMan.disconnect(_server);
         
+        if(!_server._isAuthed)
+            return;
+        
         for(Server s : _server.getServer()._clientMan.getClients())
         {
-            if(s.getName().equals(_server.getName()))
+            if(s.equals(_server))
                 continue;
             
             DataOutputStream o = s._output;
