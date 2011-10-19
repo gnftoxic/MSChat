@@ -1,9 +1,11 @@
 package com.billyewing.mschat.client;
 
 import com.billyewing.mschat.MSChat;
+import com.billyewing.mschat.network.packet.PlayerActionEvent;
 import com.billyewing.mschat.network.packet.PlayerChatEvent;
 import com.billyewing.mschat.network.packet.PlayerJoinEvent;
 import com.billyewing.mschat.network.packet.PlayerQuitEvent;
+import com.billyewing.mschat.network.packet.ServerChatEvent;
 import com.billyewing.mschat.network.packet.ServerJoinEvent;
 import com.billyewing.mschat.network.packet.ServerQuitEvent;
 import java.io.DataInputStream;

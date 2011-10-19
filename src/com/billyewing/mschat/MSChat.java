@@ -54,6 +54,7 @@ public class MSChat
             
             _config.setProperty("server-address", "0.0.0.0");
             _config.setProperty("server-port", "60000");
+            _config.setProperty("authkey", "changeme");
             saveConfig();
         }
         

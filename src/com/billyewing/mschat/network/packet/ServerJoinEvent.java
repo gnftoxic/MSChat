@@ -21,8 +21,16 @@ public class ServerJoinEvent implements Event
         // Packet Data:
         //    byte      - Packet ID
         //    String    - Server Name
+        //    String    - Authentication Token (optional)
         
         String serverName = _input.readUTF();
+        String key = _server.getServer()._config.getProperty("authkey");
+        if(!key.isEmpty())
+        {
+            String authKey = _input.readUTF();
+            if(!authKey.equals(key))
+                _server.killSelf();
+        }
         String previousName = _server.getName();
         
         _server.setName(serverName);
